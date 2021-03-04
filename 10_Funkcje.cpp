@@ -34,10 +34,15 @@ int main()
     //cout << dodawanie(2, 3) << endl;
     //int w = 2, z = 3;
     //fun1(w, z);
-	int x = 102;
-	cout << testPrime(x) << endl;
-	x = 1011;
-	cout << testPrime(x) << endl;
-	for (int i=)
+
+	//int x = 102;
+	//cout << testPrime(x) << endl;
+	//x = 1011;
+	//cout << testPrime(x) << endl;
+
+	for (int i = 1001; i < 2000; i += 2) {
+		if (testPrime(i)) cout << i << " ";
+	}
+	cout << endl;
     return 0;
 }
