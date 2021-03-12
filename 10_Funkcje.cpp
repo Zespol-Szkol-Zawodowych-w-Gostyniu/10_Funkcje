@@ -49,7 +49,7 @@ void fun2(int &a) {//przekazywanie parametru przez referencję
 	a++;
 	cout << a << endl;
 }
-
+int powerModulo(int, int, int);
 
 int main()
 {
@@ -80,11 +80,11 @@ int main()
 	//cout << x << endl;
 
 	//Referencja - przezwisko
-	int &y=x;
-	cout << x << endl;
-	y++;
-	cout << x << endl;
-
+	//int &y=x;
+	//cout << x << endl;
+	//y++;
+	//cout << x << endl;
+	cout << powerModulo(12, 53, 7) << endl;
     return 0;
 }
 
@@ -129,3 +129,16 @@ b3=0 -> x = 4 * 4 mod 7 = 2
 b4=1 -> res = 3 * 2 mod 7 = 6, x = 2 * 2 mod 7 = 4
 b5=1 -> res = 6 * 4 mod 7 = 3, x = 4 * 4 mod 7 = 2
 */
+int powerModulo(int a, int b, int n) {
+	int res = 1;
+	int x = a % n;
+	for (int i = 1; i <= b; i <<= 1) {//i*=2
+		x = x % n; //x%=n;
+		if ((b & i) != 0) {//sprawdze czy na i-tej pozycji jest 0 czy 1 w zapisie binarnym liczby b
+			res *= x;
+			res %= n;//res=res%n
+		}
+		x *= x;
+	}
+	return res;
+}
