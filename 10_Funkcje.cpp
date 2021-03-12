@@ -99,3 +99,33 @@ int NWD(int a, int b) {
 	}
 	return a;
 }
+
+//Test pierwszości - test Fermata
+/*to probabilistyczny test umożliwiający sprawdzenie czy dana liczba jest złożona 
+czy prawdopodobnie pierwsza
+Twierdzenie
+Jeśli liczba p jest liczbą pierwszą to dla każdego a takiej, że 1<=a<p  a należy do [1,p)
+a^(p-1) mod p = 1
+Problem: jak szybko podnosić liczbę a do potęgi i wykonać operację modulo?
+Odpowiedź: algorytm szybkiego potęgowania modularnego
+a^b mod n  dla a>=n
+a^b mod n = (a mod n)^b
+założenie: b=(bm,..b1,b0) w zapisie binarnym
+a^b mod n = (a^(b0*2^0) mod n * ... * (a^(bm*2^m) mod n)
+wiadomo również, że: a^2^m mod n = (a^2^(m-1)*a^2^(m-1)) mod n
+oraz a mod n = (x mod n)(y mod n), gdzie a = xy
+a^b mod n =(((a·a mod n)·a mod n) ... )·a mod n
+Wynika z tego, że musimy przemnożyć tylko te bity, których wartość wynosi 1
+Przykład:
+12^53 mod 7
+53=(110101)
+a=12 mod 7 = 5
+res=1
+x=a
+b0=1 -> res = 1 * 5 mod 7 = 5, x = 5 * 5 mod 7 = 4
+b1=0 -> x = 4 * 4 mod 7 = 2
+b2=1 -> res = 5 * 2 mod 7 = 3, x = 2 * 2 mod 7 = 4
+b3=0 -> x = 4 * 4 mod 7 = 2
+b4=1 -> res = 3 * 2 mod 7 = 6, x = 2 * 2 mod 7 = 4
+b5=1 -> res = 6 * 4 mod 7 = 3, x = 4 * 4 mod 7 = 2
+*/
