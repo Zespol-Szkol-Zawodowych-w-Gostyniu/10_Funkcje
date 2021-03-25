@@ -34,7 +34,6 @@ bool testPrime(int n) {
 
 int NWD(int, int); //prototyp funkcji - zapowiedz funkcji
 
-
 void zasieg(int a) {
 	int b = 2; //zmienna b ma zasięg lokalny
 	cout << b << endl;
@@ -50,6 +49,7 @@ void fun2(int &a) {//przekazywanie parametru przez referencję
 	cout << a << endl;
 }
 int powerModulo(int, int, int);
+int testFermata(int, int);
 
 int main()
 {
@@ -73,7 +73,7 @@ int main()
 	//zasieg(2);
 	//cout << b << endl; BŁĄD! bo b jest zmienną lokalną funkcji "zasieg"
 	
-	int x = 12;
+	int x = 3631;
 	//cout << x << endl;
 	////fun1(x);
 	//fun2(x);
@@ -84,8 +84,16 @@ int main()
 	//cout << x << endl;
 	//y++;
 	//cout << x << endl;
-	cout << powerModulo(12, 53, 7) << endl;
-    return 0;
+	//cout << powerModulo(12, 53, 7) << endl;
+	
+	//cout << time(NULL) << endl;
+	if (testFermata(x, 40) == 1) {
+		cout << "Liczba "<<x<<" jest prawdopodobnie pierwsza" << endl;
+	}
+	else {
+		cout << "Liczba " << x << " nie jest pierwsza!" << endl;
+	}
+	return 0;
 }
 
 int NWD(int a, int b) {
@@ -104,7 +112,7 @@ int NWD(int a, int b) {
 /*to probabilistyczny test umożliwiający sprawdzenie czy dana liczba jest złożona 
 czy prawdopodobnie pierwsza
 Twierdzenie
-Jeśli liczba p jest liczbą pierwszą to dla każdego a takiej, że 1<=a<p  a należy do [1,p)
+Jeśli liczba p jest liczbą pierwszą to dla każdego a takiego, że 1<=a<p  a należy do [1,p)
 a^(p-1) mod p = 1
 Problem: jak szybko podnosić liczbę a do potęgi i wykonać operację modulo?
 Odpowiedź: algorytm szybkiego potęgowania modularnego
@@ -129,6 +137,7 @@ b3=0 -> x = 4 * 4 mod 7 = 2
 b4=1 -> res = 3 * 2 mod 7 = 6, x = 2 * 2 mod 7 = 4
 b5=1 -> res = 6 * 4 mod 7 = 3, x = 4 * 4 mod 7 = 2
 */
+//a^b mod n
 int powerModulo(int a, int b, int n) {
 	int res = 1;
 	int x = a % n;
@@ -141,4 +150,25 @@ int powerModulo(int a, int b, int n) {
 		x *= x;
 	}
 	return res;
+}
+//a^(p-1) mod p = 1
+//jeżeli return 1 to prawdopodobnie p jest pierwsze
+//jeżeli return 0 to p nie jest pierwsza
+int testFermata(int p, int k) {
+	int a, i;
+	//losowanie liczby a
+	srand(time(NULL));//inicjalizacja generatora liczb pseudolosowych
+	if (p <= 1) return 0;//p nie jest pierwsza
+	if (p < 4) {
+		return 1;//p jest pierwsza
+	}
+	//k - oznacza ilość losowań liczby a
+	for (i = 0; i < k; i++) {
+		a=(rand() % (p-1))+1; // rand()%100 -> 0-99
+		cout << a << endl;
+		if (powerModulo(a,p-1,p) != 1) {
+			return 0;
+		}
+	}
+	return 1;
 }
