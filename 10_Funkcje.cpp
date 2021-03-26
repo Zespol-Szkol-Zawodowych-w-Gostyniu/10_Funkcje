@@ -50,6 +50,8 @@ void fun2(int &a) {//przekazywanie parametru przez referencję
 }
 int powerModulo(int, int, int);
 int testFermata(int, int);
+int silnia(int);
+int fibo(int);
 
 int main()
 {
@@ -87,12 +89,18 @@ int main()
 	//cout << powerModulo(12, 53, 7) << endl;
 	
 	//cout << time(NULL) << endl;
-	if (testFermata(x, 40) == 1) {
-		cout << "Liczba "<<x<<" jest prawdopodobnie pierwsza" << endl;
-	}
-	else {
-		cout << "Liczba " << x << " nie jest pierwsza!" << endl;
-	}
+	// 
+	//if (testFermata(x, 40) == 1) {
+	//	cout << "Liczba "<<x<<" jest prawdopodobnie pierwsza" << endl;
+	//}
+	//else {
+	//	cout << "Liczba " << x << " nie jest pierwsza!" << endl;
+	//}
+
+	//Rekurencja - silnia
+	cout << silnia(8) << endl;
+	//Rekurencja - ciag Fibonacciego
+	cout << fibo(10) << endl;
 	return 0;
 }
 
@@ -172,3 +180,40 @@ int testFermata(int p, int k) {
 	}
 	return 1;
 }
+
+
+
+//Rekurencja
+//zdolność funkcji do wywoływania samej siebie
+/*
+Przykład - silnia
+n!=(n-1)!*n
+0!=1
+te 2 równania stanowią definicję rekurencyjną silni
+Wersja iteracyjna silni:
+n!=1*2*...*n
+*/
+//3!=2!*3=1!*2*3=0!*1*2*3=1*2*3=6
+int silnia(int n) {
+	if (n == 0) return 1;
+	return silnia(n - 1) * n;
+}
+
+//Ciąg liczb Fibonacciego
+/*
+f(n)=f(n-1)+f(n-2) dla n>2
+f(1)=1
+f(1)=1
+lub:
+f(n)=f(n-1)+f(n-2) dla n>1
+f(0)=0
+f(1)=1
+*/
+
+int fibo(int n) {
+	if ((n == 1)||(n==2)) return 1;
+	return fibo(n - 1) + fibo(n - 2);
+}
+
+//zadanie 1: Napisz funkcję która wyznaczy silnie iteracyjnie
+//zadanie 2: Napisz kod który wyznaczy pierwszych 20 wyrazów ciągu Fibonacciego
