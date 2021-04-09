@@ -51,8 +51,9 @@ void fun2(int &a) {//przekazywanie parametru przez referencję
 int powerModulo(int, int, int);
 int testFermata(int, int);
 int silnia(int);
+int silniaIter(int);
 int fibo(int);
-
+void ciagFibo(int);
 int main()
 {
     //cout << dodawanie(2, 3) << endl;
@@ -99,8 +100,10 @@ int main()
 
 	//Rekurencja - silnia
 	cout << silnia(8) << endl;
+	cout << silniaIter(8) << endl;
 	//Rekurencja - ciag Fibonacciego
-	cout << fibo(10) << endl;
+	//cout << fibo(10) << endl;
+	ciagFibo(20);
 	return 0;
 }
 
@@ -217,3 +220,19 @@ int fibo(int n) {
 
 //zadanie 1: Napisz funkcję która wyznaczy silnie iteracyjnie
 //zadanie 2: Napisz kod który wyznaczy pierwszych 20 wyrazów ciągu Fibonacciego
+
+int silniaIter(int n) {
+	int sil = 1;
+	for (int i = 1; i <= n; i++) {
+		sil *= i;
+	}
+	return sil;
+}
+
+void ciagFibo(int x) {
+	//x wyrazów ciągu Fibonacciego
+	for (int i = 1; i <= x; i++) {
+		cout << fibo(i) << ",";
+	}
+	cout << endl;
+}
