@@ -54,6 +54,25 @@ int silnia(int);
 int silniaIter(int);
 int fibo(int);
 void ciagFibo(int);
+//Parametry domyslne muszą byc na końcu listy!
+int fun3(int, int=10);
+
+//Przeładowanie funkcji-użycie wielokrotnie tej samej nazwy do "różnych" funkcji.
+//wiecej niż jedna funkcja o takiej samej nazwie
+int fun3(long a) {
+	return a  * 10;
+}
+//Takie coś zgłosi błąd kompilacji, bo typ zwracany przez funkcje nie ma znaczenia
+//long fun3(long a) {
+//	return a * 10;
+//}
+//Przy przeładowaniu (przeciążeniu) ma znaczenie:
+//1. ilość parametrów
+//2. typy parametrów
+int fun3(int a, int b, int c) {
+	return a + b + c;
+}
+
 int main()
 {
     //cout << dodawanie(2, 3) << endl;
@@ -99,11 +118,18 @@ int main()
 	//}
 
 	//Rekurencja - silnia
-	cout << silnia(8) << endl;
-	cout << silniaIter(8) << endl;
+	//cout << silnia(8) << endl;
+	//cout << silniaIter(8) << endl;
 	//Rekurencja - ciag Fibonacciego
 	//cout << fibo(10) << endl;
-	ciagFibo(20);
+	/*ciagFibo(20);*/
+
+	//Parametry domyślne
+	cout << fun3(1, 2) << endl;
+	cout << fun3(1) << endl;
+	long u = 3;
+	cout << fun3(u) << endl;
+	cout << fun3(2,4,5) << endl;
 	return 0;
 }
 
@@ -235,4 +261,9 @@ void ciagFibo(int x) {
 		cout << fibo(i) << ",";
 	}
 	cout << endl;
+}
+
+
+int fun3(int a, int b) {
+	return a + b;
 }
